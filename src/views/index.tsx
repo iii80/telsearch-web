@@ -24,11 +24,11 @@ function Index() {
     })();
   }, []);
   return (
-    <div className="flex flex-col justify-center items-center pt-[10%]">
+    <div className="flex flex-col justify-center items-center pb-[10%] h-screen">
       <a href="/">
         <h1 className="text-5xl font-bold mb-10">TelSearch</h1>
       </a>
-      <div className="form-control w-1/3">
+      <div className="form-control w-11/12 lg:w-1/3">
         <div className="input-group w-full">
           <input
             type="text"
@@ -60,7 +60,7 @@ function Index() {
         )}
       </div>
       {keywords && tips.length === 0 && (
-        <div className="flex flex-wrap w-1/3 gap-2">
+        <div className="flex flex-wrap w-11/12 lg:w-1/3 gap-2">
           {keywords.map((keyword) => (
             <div className="badge badge-lg" key={keyword}>
               <Link to={"/search?keyword=" + keyword}>{keyword}</Link>

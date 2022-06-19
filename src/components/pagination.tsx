@@ -1,9 +1,10 @@
 import React from "react";
 import { Page } from "../types/props";
+import { isMobile } from "react-device-detect";
 
 function Pagination(props: Page) {
   let total = props.total ?? 0;
-  let limit = props.limit ?? "20";
+  let limit = props.limit ?? (isMobile ? "10" : "20");
   let offset = props.offset ?? "0";
   let limit_number = parseInt(limit);
   let offset_number = parseInt(offset);

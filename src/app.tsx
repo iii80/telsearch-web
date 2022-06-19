@@ -5,7 +5,7 @@ import Search from "./views/search";
 
 function App() {
   return (
-    <div className="h-screen bg-base-200">
+    <div className="bg-base-200">
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="search" element={<Search />} />

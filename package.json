@@ -6,13 +6,14 @@
     "axios": "^0.27.2",
     "daisyui": "^2.15.4",
     "react": "^18.2.0",
+    "react-device-detect": "^2.2.2",
     "react-dom": "^18.2.0",
+    "react-ga4": "^1.4.1",
     "react-highlight-words": "^0.18.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.7.3",
-    "web-vitals": "^2.1.4",
-    "react-ga4": "^1.4.1"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,4 +1,5 @@
 import axios from "../axios";
+import { isMobile } from "react-device-detect";
 
 async function getSearchTips(keyword: string) {
   if (keyword.trim() === "") {
@@ -22,6 +23,8 @@ async function getSearchResults(
   };
   if (limit) {
     params.limit = limit;
+  } else if (isMobile) {
+    params.limit = "10";
   }
   if (offset) {
     params.offset = offset;
