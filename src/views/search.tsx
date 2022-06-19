@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { getLink, getSearchResults } from "../api";
 import SearchIcon from "../components/search-icon";
 import Pagination from "../components/pagination";
-import { LinkResult, SearchResult } from "../types/response";
+import { LinkResult, SearchResult, SearchResultItem } from "../types/response";
+import Highlighter from "react-highlight-words";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,12 +24,16 @@ function Search() {
     })();
   }, [searchParams]);
   const refreshPage = async () => {
+    setInput("");
     const results = await getSearchResults("", "", "");
     setResults(results);
   };
-  const onClickItem = async (id: number) => {
-    let ret: LinkResult = await getLink(id);
-    let link = ret.link;
+  const onClickItem = async (item: SearchResultItem) => {
+    let link = item.link;
+    if (!link) {
+      let ret: LinkResult = await getLink(item.id);
+      link = ret.link;
+    }
     window.open(link, "_blank");
   };
   return (
@@ -66,7 +71,7 @@ function Search() {
         {results?.data?.map((item) => (
           <div
             className="hover:cursor-pointer"
-            onClick={async () => await onClickItem(item.id)}
+            onClick={async () => await onClickItem(item)}
             key={item.id}
           >
             <div className="rounded bg-base-100 shadow-xl flex flex-col justify-center p-3">
@@ -77,12 +82,22 @@ function Search() {
                   </div>
                 </div>
                 <div>
-                  <div className="font-bold truncate w-72">{item.title}</div>
+                  <div className="font-bold truncate w-72">
+                    <Highlighter
+                      searchWords={[searchParams.get("keyword") ?? ""]}
+                      textToHighlight={item.title}
+                      highlightClassName={"bg-fuchsia-300 text-fuchsia-900"}
+                    />
+                  </div>
                   <div className="text-sm text-gray-500">
                     {item.count} members | {item.update_time.split("T")[0]}
                   </div>
                   <div className="text-sm text-gray-500 truncate w-72">
-                    {item.description}
+                    <Highlighter
+                      searchWords={[searchParams.get("keyword") ?? ""]}
+                      textToHighlight={item.description}
+                      highlightClassName={"bg-fuchsia-300 text-fuchsia-900"}
+                    />
                   </div>
                 </div>
               </div>
@@ -99,6 +114,7 @@ function Search() {
             setSearchParams({
               offset: offset.toString(),
               limit: limit.toString(),
+              keyword: input,
             })
           }
         />

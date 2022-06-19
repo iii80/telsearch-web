@@ -20,4 +20,4 @@ interface LinkResult {
   link: string;
 }
 
-export type { SearchResult, LinkResult };
+export type { SearchResult, LinkResult, SearchResultItem };
