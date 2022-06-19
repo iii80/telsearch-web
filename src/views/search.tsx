@@ -1,25 +1,9 @@
 import { useSearchParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { getSearchResults } from "../api";
+import { getLink, getSearchResults } from "../api";
 import SearchIcon from "../components/search-icon";
-
-interface SearchResultItem {
-  id: number;
-  title: string;
-  count: number;
-  description: string;
-  language: string;
-  link: string;
-  photo: string;
-  create_time: Date;
-  update_time: Date;
-  full_photo: string;
-}
-
-interface SearchResult {
-  total: number;
-  data: Array<SearchResultItem>;
-}
+import Pagination from "../components/pagination";
+import { LinkResult, SearchResult } from "../types/response";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,20 +14,36 @@ function Search() {
     (async () => {
       const keyword = searchParams.get("keyword") ?? "";
       setInput(keyword);
-      const results = await getSearchResults(keyword);
+      const results = await getSearchResults(
+        keyword,
+        searchParams.get("limit"),
+        searchParams.get("offset")
+      );
       setResults(results);
     })();
   }, [searchParams]);
+  const refreshPage = async () => {
+    const results = await getSearchResults("", "", "");
+    setResults(results);
+  };
+  const onClickItem = async (id: number) => {
+    let ret: LinkResult = await getLink(id);
+    let link = ret.link;
+    window.open(link, "_blank");
+  };
   return (
-    <div className="container mx-auto h-full">
-      <div className="flex w-full justify-center">
+    <div className="container mx-auto">
+      <div
+        className="flex w-full justify-center hover:cursor-pointer"
+        onClick={async () => await refreshPage()}
+      >
         <h1 className="text-5xl font-bold pt-10">TelSearch</h1>
       </div>
       <div className="flex justify-center w-full py-10">
         <div className="input-group w-[50%]">
           <input
             type="text"
-            placeholder="Search telegram channels here..."
+            placeholder="SEARCH TELEGRAM CHANNELS HERE..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
@@ -63,12 +63,45 @@ function Search() {
       </div>
 
       <div className="grid grid-cols-4 gap-4">
-        {results?.data?.map((item, index) => (
-          <div className="bg-gray-400 h-28 rounded p-2">
-            <div>{item.title}</div>
-            <div className="truncate">{item.description}</div>
+        {results?.data?.map((item) => (
+          <div
+            className="hover:cursor-pointer"
+            onClick={async () => await onClickItem(item.id)}
+            key={item.id}
+          >
+            <div className="rounded bg-base-100 shadow-xl flex flex-col justify-center p-3">
+              <div className="flex flex-row space-x-2">
+                <div className="avatar">
+                  <div className="w-16 h-16 rounded-md">
+                    <img src={item.full_photo} alt={item.title} />
+                  </div>
+                </div>
+                <div>
+                  <div className="font-bold truncate w-72">{item.title}</div>
+                  <div className="text-sm text-gray-500">
+                    {item.count} members | {item.update_time.split("T")[0]}
+                  </div>
+                  <div className="text-sm text-gray-500 truncate w-72">
+                    {item.description}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
+      </div>
+      <div className="flex w-full justify-center py-20">
+        <Pagination
+          total={results?.total}
+          limit={searchParams.get("limit") ?? undefined}
+          offset={searchParams.get("offset") ?? undefined}
+          onClick={(offset, limit) =>
+            setSearchParams({
+              offset: offset.toString(),
+              limit: limit.toString(),
+            })
+          }
+        />
       </div>
     </div>
   );

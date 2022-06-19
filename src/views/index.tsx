@@ -19,12 +19,14 @@ function Index() {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-center items-center pt-[10%]">
-      <h1 className="text-5xl font-bold mb-10">TelSearch</h1>
+      <a href="/">
+        <h1 className="text-5xl font-bold mb-10">TelSearch</h1>
+      </a>
       <div className="form-control w-1/3">
         <div className="input-group w-full">
           <input
             type="text"
-            placeholder="Search telegram channels here..."
+            placeholder="SEARCH TELEGRAM CHANNELS HERE..."
             value={input}
             onChange={async (e) => await onChange(e)}
             onBlur={onBlur}
