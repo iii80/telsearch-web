@@ -1,7 +1,7 @@
-import React from "react";
-import { getSearchTips } from "../api";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "../components/search-icon";
+import { getKeywords, getSearchTips } from "../apis/search";
 
 function Index() {
   const [input, setInput] = React.useState("");
@@ -17,6 +17,12 @@ function Index() {
     e.relatedTarget?.click();
   };
   const navigate = useNavigate();
+  const [keywords, setKeywords] = React.useState([]);
+  useEffect(() => {
+    (async () => {
+      setKeywords(await getKeywords());
+    })();
+  }, []);
   return (
     <div className="flex flex-col justify-center items-center pt-[10%]">
       <a href="/">
@@ -53,6 +59,15 @@ function Index() {
           </ul>
         )}
       </div>
+      {keywords && tips.length === 0 && (
+        <div className="flex flex-wrap w-1/3 gap-2">
+          {keywords.map((keyword) => (
+            <div className="badge badge-lg" key={keyword}>
+              <Link to={"/search?keyword=" + keyword}>{keyword}</Link>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

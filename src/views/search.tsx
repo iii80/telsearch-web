@@ -1,10 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { getLink, getSearchResults } from "../api";
+import { getSearchResults } from "../apis/search";
 import SearchIcon from "../components/search-icon";
 import Pagination from "../components/pagination";
 import { LinkResult, SearchResult, SearchResultItem } from "../types/response";
 import Highlighter from "react-highlight-words";
+import { getLink } from "../apis/other";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();

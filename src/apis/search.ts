@@ -1,6 +1,9 @@
-import axios from "./axios";
+import axios from "../axios";
 
 async function getSearchTips(keyword: string) {
+  if (keyword.trim() === "") {
+    return [];
+  }
   const response = await axios.get("/search/tips", {
     params: {
       keyword,
@@ -29,9 +32,9 @@ async function getSearchResults(
   return response.data;
 }
 
-async function getLink(id: number) {
-  const response = await axios.get(`/link/${id}`);
+async function getKeywords() {
+  const response = await axios.get("/search/keywords");
   return response.data;
 }
 
-export { getSearchTips, getSearchResults, getLink };
+export { getSearchTips, getSearchResults, getKeywords };
