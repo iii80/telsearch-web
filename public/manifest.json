@@ -1,0 +1,25 @@
+{
+  "short_name": "TelSearch",
+  "name": "Search for telegram",
+  "icons": [
+    {
+      "src": "telegram.svg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/svg"
+    },
+    {
+      "src": "telegram.svg",
+      "type": "image/svg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "telegram.svg",
+      "type": "image/svg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { getSearchResults } from "../apis/search";
-import SearchIcon from "../components/search-icon";
+import SearchIcon from "../components/searchIcon";
 import Pagination from "../components/pagination";
 import { LinkResult, SearchResult, SearchResultItem } from "../types/response";
 import Highlighter from "react-highlight-words";

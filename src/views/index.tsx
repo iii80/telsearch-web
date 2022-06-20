@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SearchIcon from "../components/search-icon";
+import SearchIcon from "../components/searchIcon";
 import { getKeywords, getSearchTips } from "../apis/search";
 import Heading from "../components/heading";
 
