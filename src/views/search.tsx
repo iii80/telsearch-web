@@ -6,6 +6,7 @@ import Pagination from "../components/pagination";
 import { LinkResult, SearchResult, SearchResultItem } from "../types/response";
 import Highlighter from "react-highlight-words";
 import { getLink } from "../apis/other";
+import Heading from "../components/heading";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -43,7 +44,9 @@ function Search() {
         className="flex w-full justify-center hover:cursor-pointer"
         onClick={async () => await refreshPage()}
       >
-        <h1 className="text-5xl font-bold lg:pt-10 pt-5">TelSearch</h1>
+        <h1 className="text-5xl font-bold lg:pt-10 pt-5">
+          <Heading />
+        </h1>
       </div>
       <div className="flex justify-center lg:w-full lg:py-10 py-5">
         <div className="input-group lg:w-[50%] w-11/12">

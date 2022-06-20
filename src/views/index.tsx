@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "../components/search-icon";
 import { getKeywords, getSearchTips } from "../apis/search";
+import Heading from "../components/heading";
 
 function Index() {
   const [input, setInput] = React.useState("");
@@ -26,7 +27,9 @@ function Index() {
   return (
     <div className="flex flex-col justify-center items-center pb-[10%] h-screen">
       <a href="/">
-        <h1 className="text-5xl font-bold mb-10">TelSearch</h1>
+        <h1 className="text-5xl font-bold mb-10">
+          <Heading />
+        </h1>
       </a>
       <div className="form-control w-11/12 lg:w-1/3">
         <div className="input-group w-full">
@@ -51,7 +54,7 @@ function Index() {
         </div>
         {tips && (
           <ul className="menu bg-base-100 mt-3 rounded-md">
-            {tips.map((tip, index) => (
+            {tips.map((tip) => (
               <li key={tip}>
                 <Link to={"/search?keyword=" + tip}>{tip}</Link>
               </li>
@@ -62,8 +65,10 @@ function Index() {
       {keywords && tips.length === 0 && (
         <div className="flex flex-wrap w-11/12 lg:w-1/3 gap-2">
           {keywords.map((keyword) => (
-            <div className="badge badge-lg" key={keyword}>
-              <Link to={"/search?keyword=" + keyword}>{keyword}</Link>
+            <div className="badge badge-lg truncate" key={keyword}>
+              <Link to={"/search?keyword=" + keyword} className="truncate">
+                {keyword}
+              </Link>
             </div>
           ))}
         </div>
