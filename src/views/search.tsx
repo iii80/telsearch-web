@@ -41,14 +41,12 @@ function Search() {
   return (
     <div className="container mx-auto lg:h-screen min-h-screen">
       <div
-        className="flex w-full justify-center hover:cursor-pointer"
+        className="flex w-full justify-center hover:cursor-pointer lg:pt-10 pt-5"
         onClick={async () => await refreshPage()}
       >
-        <h1 className="text-5xl font-bold lg:pt-10 pt-5">
-          <Heading />
-        </h1>
+        <Heading />
       </div>
-      <div className="flex justify-center lg:w-full lg:py-10 py-5">
+      <div className="flex justify-center lg:w-full lg:pb-10 pb-5">
         <div className="input-group lg:w-[50%] w-11/12">
           <input
             type="text"

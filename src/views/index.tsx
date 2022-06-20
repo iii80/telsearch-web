@@ -25,12 +25,12 @@ function Index() {
     })();
   }, []);
   return (
-    <div className="flex flex-col justify-center items-center pb-[10%] h-screen">
-      <a href="/">
-        <h1 className="text-5xl font-bold mb-10">
+    <div className="flex flex-col items-center h-screen pt-[10%]">
+      <div>
+        <a href="/">
           <Heading />
-        </h1>
-      </a>
+        </a>
+      </div>
       <div className="form-control w-11/12 lg:w-1/3">
         <div className="input-group w-full">
           <input
@@ -53,13 +53,18 @@ function Index() {
           </button>
         </div>
         {tips && (
-          <ul className="menu bg-base-100 mt-3 rounded-md">
-            {tips.map((tip) => (
-              <li key={tip}>
-                <Link to={"/search?keyword=" + tip}>{tip}</Link>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <ul
+              tabIndex={0}
+              className="menu shadow bg-base-100 mt-3 rounded-md"
+            >
+              {tips.map((tip) => (
+                <li key={tip}>
+                  <Link to={"/search?keyword=" + tip}>{tip}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
       {keywords && tips.length === 0 && (
