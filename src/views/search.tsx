@@ -1,6 +1,6 @@
-import { useSearchParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { getSearchResults } from "../apis/search";
+import { Link, useSearchParams } from "react-router-dom";
+import React, { ChangeEvent, FocusEvent, useEffect, useState } from "react";
+import { getSearchResults, getSearchTips } from "../apis/search";
 import SearchIcon from "../components/searchIcon";
 import Pagination from "../components/pagination";
 import { LinkResult, SearchResult, SearchResultItem } from "../types/response";
@@ -12,6 +12,7 @@ function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [results, setResults] = useState<SearchResult>();
   const [input, setInput] = React.useState("");
+  const [tips, setTips] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -38,26 +39,37 @@ function Search() {
     }
     window.open(link, "_blank");
   };
+  const onBlur = (e: FocusEvent<HTMLInputElement>) => {
+    setTips([]);
+    // @ts-ignore
+    e.relatedTarget?.click();
+  };
+  const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+    let data = await getSearchTips(e.target.value);
+    setTips(data);
+  };
   return (
     <div className="container mx-auto lg:h-screen min-h-screen">
       <div
-        className="flex w-full justify-center hover:cursor-pointer lg:pt-10 pt-5"
+        className="flex justify-center hover:cursor-pointer lg:pt-10 pt-5"
         onClick={async () => await refreshPage()}
       >
         <Heading />
       </div>
-      <div className="flex justify-center lg:w-full lg:pb-10 pb-5">
-        <div className="input-group lg:w-[50%] w-11/12">
+      <div className="lg:w-full pb-5 lg:px-[25%] px-[4%] relative">
+        <div className="input-group w-full">
           <input
             type="text"
             placeholder="SEARCH TELEGRAM CHANNELS HERE..."
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={async (e) => await onChange(e)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 setSearchParams({ keyword: input });
               }
             }}
+            onBlur={onBlur}
             className="input input-bordered w-full"
           />
           <button
@@ -67,9 +79,19 @@ function Search() {
             <SearchIcon />
           </button>
         </div>
+        {tips && (
+          <div className="absolute z-10 lg:w-[50%] w-[92%]">
+            <ul className="menu shadow bg-base-100 mt-3 rounded-md">
+              {tips.map((tip) => (
+                <li key={tip}>
+                  <Link to={"/search?keyword=" + tip}>{tip}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-
-      <div className="grid lg:grid-cols-4 gap-4 lg:w-full">
+      <div className="grid lg:grid-cols-4 gap-4">
         {results?.data?.map((item) => (
           <div
             className="hover:cursor-pointer flex place-content-center"

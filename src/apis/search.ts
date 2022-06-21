@@ -1,5 +1,7 @@
 import axios from "../axios";
 import { isMobile } from "react-device-detect";
+import * as localforage from "localforage";
+import constants from "../constants";
 
 async function getSearchTips(keyword: string) {
   if (keyword.trim() === "") {
@@ -18,6 +20,12 @@ async function getSearchResults(
   limit: string | null,
   offset: string | null
 ) {
+  if (keyword.trim() !== "") {
+    let keywords: Set<string> =
+      (await localforage.getItem(constants.KEYWORDS)) || new Set();
+    keywords.add(keyword);
+    await localforage.setItem(constants.KEYWORDS, keywords);
+  }
   let params: Record<string, string> = {
     keyword,
   };
