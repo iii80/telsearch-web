@@ -52,7 +52,7 @@ function Search() {
   return (
     <div className="container mx-auto lg:h-screen min-h-screen">
       <div
-        className="flex justify-center hover:cursor-pointer lg:pt-10 pt-5"
+        className="hover:cursor-pointer lg:pt-10 pt-5"
         onClick={async () => await refreshPage()}
       >
         <Heading />
@@ -67,6 +67,7 @@ function Search() {
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 setSearchParams({ keyword: input });
+                setTips([]);
               }
             }}
             onBlur={onBlur}
