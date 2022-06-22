@@ -1,18 +1,17 @@
-import { Link, useSearchParams } from "react-router-dom";
-import React, { ChangeEvent, FocusEvent, useEffect, useState } from "react";
-import { getSearchResults, getSearchTips } from "../apis/search";
-import SearchIcon from "../components/searchIcon";
+import { useSearchParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { getSearchResults } from "../apis/search";
 import Pagination from "../components/pagination";
+import SearchComponent from "../components/search";
+
 import { LinkResult, SearchResult, SearchResultItem } from "../types/response";
 import Highlighter from "react-highlight-words";
 import { getLink } from "../apis/other";
-import Heading from "../components/heading";
 
-function Search() {
+function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [results, setResults] = useState<SearchResult>();
   const [input, setInput] = React.useState("");
-  const [tips, setTips] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -26,11 +25,6 @@ function Search() {
       setResults(results);
     })();
   }, [searchParams]);
-  const refreshPage = async () => {
-    setInput("");
-    const results = await getSearchResults("", "", "");
-    setResults(results);
-  };
   const onClickItem = async (item: SearchResultItem) => {
     let link = item.link;
     if (!link) {
@@ -39,59 +33,9 @@ function Search() {
     }
     window.open(link, "_blank");
   };
-  const onBlur = (e: FocusEvent<HTMLInputElement>) => {
-    setTips([]);
-    // @ts-ignore
-    e.relatedTarget?.click();
-  };
-  const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-    let data = await getSearchTips(e.target.value);
-    setTips(data);
-  };
   return (
-    <div className="container mx-auto lg:h-screen min-h-screen">
-      <div
-        className="hover:cursor-pointer lg:pt-10 pt-5"
-        onClick={async () => await refreshPage()}
-      >
-        <Heading />
-      </div>
-      <div className="lg:w-full pb-5 lg:px-[25%] px-[4%] relative">
-        <div className="input-group w-full">
-          <input
-            type="text"
-            placeholder="SEARCH TELEGRAM CHANNELS HERE..."
-            value={input}
-            onChange={async (e) => await onChange(e)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                setSearchParams({ keyword: input });
-                setTips([]);
-              }
-            }}
-            onBlur={onBlur}
-            className="input input-bordered w-full"
-          />
-          <button
-            className="btn btn-square"
-            onClick={() => setSearchParams({ keyword: input })}
-          >
-            <SearchIcon />
-          </button>
-        </div>
-        {tips && (
-          <div className="absolute z-10 lg:w-[50%] w-[92%]">
-            <ul className="menu shadow bg-base-100 mt-3 rounded-md">
-              {tips.map((tip) => (
-                <li key={tip}>
-                  <Link to={"/search?keyword=" + tip}>{tip}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+    <div>
+      <SearchComponent className="lg:py-10 py-5 lg:px-[25%] px-[4%]" />
       <div className="grid lg:grid-cols-4 gap-4">
         {results?.data?.map((item) => (
           <div
@@ -148,4 +92,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default SearchResults;

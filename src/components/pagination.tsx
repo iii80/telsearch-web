@@ -1,8 +1,8 @@
 import React from "react";
-import { Page } from "../types/props";
+import { PagePros } from "../types/props";
 import { isMobile } from "react-device-detect";
 
-function Pagination(props: Page) {
+function Pagination(props: PagePros) {
   let total = props.total ?? 0;
   let limit = props.limit ?? (isMobile ? "10" : "20");
   let offset = props.offset ?? "0";

@@ -1,8 +1,12 @@
-interface Page {
+interface PagePros {
   onClick: (offset: number, limit: number) => void;
   total?: number;
   limit?: string;
   offset?: string;
 }
 
-export type { Page };
+interface SearchProps {
+  className?: string;
+}
+
+export type { PagePros, SearchProps };
