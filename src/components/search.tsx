@@ -88,7 +88,7 @@ function Search(props: SearchProps) {
         </div>
       </div>
       {!isBlur && (
-        <div className="absolute z-10 lg:w-[50%] w-[92%]">
+        <div className="absolute z-10 lg:w-[50%] w-[92%] pt-2">
           <ul tabIndex={0} className="menu shadow bg-base-100 rounded">
             {(input ? tips : keywords).map((keyword) => (
               <li key={keyword}>
