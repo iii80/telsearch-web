@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import ReactGA from "react-ga4";
 import * as serviceWorker from "./serviceWorker";
+import "@fontsource/asap/700.css";
 
 ReactGA.initialize("G-0P6V441XEZ");
 ReactGA.send("pageview");

@@ -60,10 +60,10 @@ function Search(props: SearchProps) {
         </a>
       </div>
       <div className="form-control w-full pb-2">
-        <div className="input-group">
+        <div className="flex">
           <input
             type="text"
-            placeholder="SEARCH TELEGRAM CHANNELS HERE..."
+            placeholder="SEARCH FOR TELEGRAM HERE..."
             value={input}
             onChange={async (e) => {
               setIsBlur(false);
@@ -75,12 +75,12 @@ function Search(props: SearchProps) {
                 await search(input);
               }
             }}
-            className="input input-bordered w-full focus:outline-none"
+            className="input input-bordered w-full focus:outline-none rounded-r-none placeholder:font-asap"
             onFocus={() => setIsBlur(false)}
             onBlur={() => setIsBlur(true)}
           />
           <button
-            className="btn btn-square rounded-r-lg"
+            className="btn btn-square rounded-l-none"
             onClick={() => search(input)}
           >
             <SearchIcon />
@@ -89,7 +89,7 @@ function Search(props: SearchProps) {
       </div>
       {!isBlur && (
         <div className="absolute z-10 lg:w-[50%] w-[92%]">
-          <ul tabIndex={0} className="menu shadow bg-base-100">
+          <ul tabIndex={0} className="menu shadow bg-base-100 rounded">
             {(input ? tips : keywords).map((keyword) => (
               <li key={keyword}>
                 <div

@@ -12,7 +12,7 @@ function Pagination(props: PagePros) {
     <div className="btn-group grid grid-cols-2">
       {offset_number >= limit_number && (
         <button
-          className="btn btn-outline"
+          className="btn btn-outline font-asap"
           onClick={() =>
             props.onClick(offset_number - limit_number, limit_number)
           }
@@ -21,14 +21,16 @@ function Pagination(props: PagePros) {
         </button>
       )}
       {offset_number < limit_number && (
-        <button className="btn btn-outline btn-disabled">Previous</button>
+        <button className="btn btn-outline btn-disabled font-asap">
+          Previous
+        </button>
       )}
       {offset_number > total - limit_number && (
-        <button className="btn btn-outline btn-disabled">Next</button>
+        <button className="btn btn-outline btn-disabled font-asap">Next</button>
       )}
       {offset_number <= total - limit_number && (
         <button
-          className="btn btn-outline"
+          className="btn btn-outline font-asap"
           onClick={() =>
             props.onClick(offset_number + limit_number, limit_number)
           }

@@ -5,7 +5,7 @@ function Heading() {
     <h1 className="text-5xl font-bold mb-5 lg:mb-10">
       <span className="flex justify-center space-x-4">
         <img src="/telegram.svg" alt="logo" />
-        <span>TelSearch</span>
+        <span className="font-asap">TelSearch</span>
       </span>
     </h1>
   );
