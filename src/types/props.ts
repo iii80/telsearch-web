@@ -9,4 +9,8 @@ interface SearchProps {
   className?: string;
 }
 
-export type { PagePros, SearchProps };
+interface HeadingProps {
+  className?: string;
+}
+
+export type { PagePros, SearchProps, HeadingProps };

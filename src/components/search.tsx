@@ -56,10 +56,10 @@ function Search(props: SearchProps) {
     <div className={"relative " + props.className ?? ""}>
       <div>
         <a href="/">
-          <Heading />
+          <Heading className="pb-5 lg:pb-10" />
         </a>
       </div>
-      <div className="form-control w-full pb-2">
+      <div className="form-control w-full">
         <div className="flex">
           <input
             type="text"
