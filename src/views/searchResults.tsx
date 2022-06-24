@@ -118,7 +118,7 @@ function SearchResults() {
           </label>
         ))}
       </div>
-      <div className="flex w-full justify-center lg:py-20 py-5">
+      <div className="flex w-full justify-center lg:py-12 py-5">
         <Pagination
           total={results?.total}
           limit={searchParams.get("limit") ?? undefined}

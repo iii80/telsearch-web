@@ -13,4 +13,12 @@ interface HeadingProps {
   className?: string;
 }
 
-export type { PagePros, SearchProps, HeadingProps };
+interface FooterProps {
+  className?: string;
+}
+
+interface SwapProps {
+  className?: string;
+}
+
+export type { PagePros, SearchProps, HeadingProps, FooterProps, SwapProps };
