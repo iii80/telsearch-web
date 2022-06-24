@@ -35,7 +35,7 @@ function SearchResults() {
   };
   return (
     <div>
-      <SearchComponent className="lg:py-10 py-5 lg:px-[25%] px-[4%]" />
+      <SearchComponent className="lg:pb-8 py-5 lg:pt-0 lg:px-[25%] px-[4%]" />
       <div className="grid lg:grid-cols-4 gap-4">
         {results?.data?.map((item) => (
           <label

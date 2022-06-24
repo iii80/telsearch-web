@@ -8,7 +8,7 @@ function Swap(props: SwapProps) {
     themeChange(false);
   }, []);
   return (
-    <label className={"absolute swap swap-rotate " + props.className}>
+    <label className={"swap swap-rotate " + props.className}>
       <input type="checkbox" data-toggle-theme="light,dark" />
       <svg
         className="swap-on fill-current w-8 h-8"

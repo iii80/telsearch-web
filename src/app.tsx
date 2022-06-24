@@ -10,19 +10,19 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="bg-base-200">
+    <div className="bg-base-200 flex flex-col min-h-screen">
       {(!isMobile || (isMobile && location.pathname === "/")) && (
-        <Swap className="right-8 top-8" />
-      )}
-      <div className="flex flex-col min-h-screen">
-        <div className="container mx-auto">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="search" element={<SearchResults />} />
-          </Routes>
+        <div className="flex">
+          <Swap className="ml-auto pt-8 pr-8" />
         </div>
-        <Footer className="mt-auto lg:pb-[2%] pb-[5%]" />
+      )}
+      <div className="container mx-auto">
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="search" element={<SearchResults />} />
+        </Routes>
       </div>
+      <Footer className="mt-auto lg:pb-[2%] pb-[5%]" />
     </div>
   );
 }
