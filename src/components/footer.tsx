@@ -8,7 +8,12 @@ function Footer(props: FooterProps) {
       <div>
         <p>
           Copyright © 2022 - All right reserved by{" "}
-          <a className="link" href="mailto: admin@telsearch.me">
+          <a
+            className="link"
+            href="https://github.com/telsearch"
+            target="_blank"
+            rel="noreferrer"
+          >
             TelSearch
           </a>
         </p>
