@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Index from "./views";
 import { Routes, Route, useLocation } from "react-router-dom";
 import SearchResults from "./views/searchResults";
@@ -8,7 +8,9 @@ import { isMobile } from "react-device-detect";
 
 function App() {
   const location = useLocation();
-
+  useEffect(() => {
+    document.body.className = "bg-base-200";
+  });
   return (
     <div className="bg-base-200 flex flex-col min-h-screen">
       {(!isMobile || (isMobile && location.pathname === "/")) && (
