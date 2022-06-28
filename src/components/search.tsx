@@ -54,11 +54,7 @@ function Search(props: SearchProps) {
   };
   return (
     <div className={"relative " + props.className ?? ""}>
-      <div>
-        <a href="/">
-          <Heading className="pb-5 lg:pb-10" />
-        </a>
-      </div>
+      <Heading className="pb-5 lg:pb-10" />
       <div className="form-control w-full">
         <div className="flex">
           <input
