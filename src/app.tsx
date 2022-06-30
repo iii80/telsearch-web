@@ -12,7 +12,7 @@ function App() {
     document.body.className = "bg-base-200";
   });
   return (
-    <div className="bg-base-200 flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen">
       {(!isMobile || (isMobile && location.pathname === "/")) && (
         <div className="flex">
           <Swap className="ml-auto pt-8 pr-8" />

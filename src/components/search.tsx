@@ -45,11 +45,14 @@ function Search(props: SearchProps) {
   const search = async (keyword: string) => {
     let keywords: Set<string> =
       (await localforage.getItem(constants.KEYWORDS)) || new Set();
-    keywords.add(keyword);
-    if (keywords.size > 10) {
-      keywords.delete(keywords.values().next().value);
+    if (keyword !== "") {
+      keywords.add(keyword);
+      if (keywords.size > 10) {
+        keywords.delete(keywords.values().next().value);
+      }
+      await localforage.setItem(constants.KEYWORDS, keywords);
     }
-    await localforage.setItem(constants.KEYWORDS, keywords);
+
     navigate("/search?keyword=" + keyword);
   };
   return (
@@ -77,7 +80,7 @@ function Search(props: SearchProps) {
           />
           <button
             className="btn btn-square rounded-l-none"
-            onClick={() => search(input)}
+            onClick={async () => await search(input)}
           >
             <SearchIcon />
           </button>
