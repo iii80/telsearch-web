@@ -35,4 +35,9 @@ async function getSearchResults(
   return response.data;
 }
 
-export { getSearchTips, getSearchResults };
+async function getKeywords() {
+  const response = await axios.get("/search/keywords");
+  return response.data;
+}
+
+export { getSearchTips, getSearchResults, getKeywords };
