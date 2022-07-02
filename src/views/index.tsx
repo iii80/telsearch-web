@@ -12,7 +12,7 @@ function Index() {
   }, []);
   return (
     <div>
-      <Search className="pt-[50%] lg:pt-[10%] lg:px-[25%] px-[4%]" />
+      <Search className="pt-[30%] lg:pt-[10%] lg:px-[25%] px-[4%]" />
       {keywords && (
         <div className="flex flex-wrap mx-auto gap-2 pt-2 lg:w-[50%] w-[92%]">
           {keywords.map((keyword) => (
