@@ -11,7 +11,7 @@ function Footer(props: FooterProps) {
           Copyright © 2022 - All right reserved by{" "}
           <a
             className="link font-bold"
-            href="https://github.com/telsearch"
+            href="tg://resolve?domain=telsearch1"
             target="_blank"
             rel="noreferrer"
           >

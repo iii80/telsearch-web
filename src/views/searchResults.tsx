@@ -31,6 +31,8 @@ function SearchResults() {
       let ret: LinkResult = await getLink(item.id);
       link = ret.link;
     }
+    let items = link.split("/");
+    link = "tg://resolve?domain=" + items[items.length - 1];
     window.open(link, "_blank");
   };
   return (
