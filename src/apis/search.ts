@@ -35,8 +35,12 @@ async function getSearchResults(
   return response.data;
 }
 
-async function getKeywords() {
-  const response = await axios.get("/search/keywords");
+async function getKeywords(limit: number) {
+  const response = await axios.get("/search/keywords", {
+    params: {
+      limit,
+    },
+  });
   return response.data;
 }
 

@@ -2,12 +2,13 @@ import Search from "../components/search";
 import { useEffect, useState } from "react";
 import { getKeywords } from "../apis/search";
 import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 function Index() {
   const [keywords, setKeywords] = useState([]);
   useEffect(() => {
     (async () => {
-      setKeywords(await getKeywords());
+      setKeywords(await getKeywords(isMobile ? 24 : 48));
     })();
   }, []);
   return (
