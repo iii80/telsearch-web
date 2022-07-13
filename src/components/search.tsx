@@ -57,7 +57,7 @@ function Search(props: SearchProps) {
   };
   return (
     <div className={"relative " + props.className ?? ""}>
-      <Heading className="pb-5 lg:pb-10" />
+      <Heading className="pb-5 lg:pb-10" onClick={props.onClick} />
       <div className="form-control w-full">
         <div className="flex">
           <input

@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { getSearchResults } from "../apis/search";
 import Pagination from "../components/pagination";
@@ -12,7 +12,7 @@ function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [results, setResults] = useState<SearchResult>();
   const [input, setInput] = React.useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     (async () => {
       const keyword = searchParams.get("keyword") ?? "";
@@ -37,7 +37,10 @@ function SearchResults() {
   };
   return (
     <div>
-      <SearchComponent className="lg:pb-8 py-5 lg:pt-0 lg:px-[25%] px-[4%]" />
+      <SearchComponent
+        className="lg:pb-8 py-5 lg:pt-0 lg:px-[25%] px-[4%]"
+        onClick={() => navigate("/")}
+      />
       <div className="grid lg:grid-cols-4 gap-4">
         {results?.data?.map((item) => (
           <label

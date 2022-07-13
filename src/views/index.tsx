@@ -6,14 +6,23 @@ import { isMobile } from "react-device-detect";
 
 function Index() {
   const [keywords, setKeywords] = useState([]);
+  const getKeywords_ = async () => {
+    return await getKeywords(isMobile ? 24 : 48);
+  };
   useEffect(() => {
     (async () => {
-      setKeywords(await getKeywords(isMobile ? 24 : 48));
+      setKeywords(await getKeywords_());
     })();
   }, []);
+
   return (
     <div>
-      <Search className="pt-[30%] lg:pt-[10%] lg:px-[25%] px-[4%]" />
+      <Search
+        className="pt-[30%] lg:pt-[10%] lg:px-[25%] px-[4%]"
+        onClick={async () => {
+          setKeywords(await getKeywords_());
+        }}
+      />
       {keywords && (
         <div className="flex flex-wrap mx-auto gap-2 pt-2 lg:w-[50%] w-[92%]">
           {keywords.map((keyword) => (
