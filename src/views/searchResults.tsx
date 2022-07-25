@@ -5,7 +5,6 @@ import Pagination from "../components/pagination";
 import SearchComponent from "../components/search";
 
 import { LinkResult, SearchResult, SearchResultItem } from "../types/response";
-import Highlighter from "react-highlight-words";
 import { getLink } from "../apis/other";
 
 function SearchResults() {
@@ -63,21 +62,17 @@ function SearchResults() {
                   </div>
                   <div>
                     <div className="font-bold">
-                      <Highlighter
-                        searchWords={[searchParams.get("keyword") ?? ""]}
-                        textToHighlight={item.title}
-                        highlightClassName={"bg-fuchsia-300 text-fuchsia-900"}
-                      />
+                      <span
+                        dangerouslySetInnerHTML={{ __html: item.title }}
+                      ></span>
                     </div>
                     <div className="text-sm text-gray-500">
                       {item.count} members | {item.update_time.split("T")[0]}
                     </div>
                     <div className="text-sm text-gray-500">
-                      <Highlighter
-                        searchWords={[searchParams.get("keyword") ?? ""]}
-                        textToHighlight={item.description}
-                        highlightClassName={"bg-fuchsia-300 text-fuchsia-900"}
-                      />
+                      <span
+                        dangerouslySetInnerHTML={{ __html: item.description }}
+                      ></span>
                     </div>
                   </div>
                 </div>
@@ -100,22 +95,20 @@ function SearchResults() {
                   </div>
                 </div>
                 <div>
-                  <div className="font-bold truncate lg:w-72 w-64">
-                    <Highlighter
-                      searchWords={[searchParams.get("keyword") ?? ""]}
-                      textToHighlight={item.title}
-                      highlightClassName={"bg-fuchsia-300 text-fuchsia-900"}
-                    />
+                  <div className="font-bold lg:w-72 w-64">
+                    <div
+                      className="truncate"
+                      dangerouslySetInnerHTML={{ __html: item.title }}
+                    ></div>
                   </div>
                   <div className="text-sm text-gray-500">
                     {item.count} members | {item.update_time.split("T")[0]}
                   </div>
-                  <div className="text-sm text-gray-500 truncate lg:w-72 w-64">
-                    <Highlighter
-                      searchWords={[searchParams.get("keyword") ?? ""]}
-                      textToHighlight={item.description}
-                      highlightClassName={"bg-fuchsia-300 text-fuchsia-900"}
-                    />
+                  <div className="text-sm text-gray-500 lg:w-72 w-64">
+                    <div
+                      className="truncate"
+                      dangerouslySetInnerHTML={{ __html: item.description }}
+                    ></div>
                   </div>
                 </div>
               </div>
