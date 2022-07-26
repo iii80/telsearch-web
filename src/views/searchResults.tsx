@@ -76,7 +76,10 @@ function SearchResults() {
                     </div>
                   </div>
                 </div>
-                <div className="flex w-full mt-2 ">
+                <div className="flex w-full mt-2 items-center">
+                  <div className="text-sm text-gray-500">
+                    温馨提醒：请使用科学上网打开
+                  </div>
                   <label
                     htmlFor={"modal-" + item.id}
                     className="btn ml-auto"
