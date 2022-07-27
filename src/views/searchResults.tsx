@@ -5,7 +5,7 @@ import Pagination from "../components/pagination";
 import SearchComponent from "../components/search";
 
 import { LinkResult, SearchResult, SearchResultItem } from "../types/response";
-import { getLink } from "../apis/other";
+import { getLink } from "../apis/link";
 
 function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams();
